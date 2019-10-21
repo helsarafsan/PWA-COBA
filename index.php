@@ -1,8 +1,35 @@
+<?php
+
+	$defbirth=date('Y-m-d',strtotime('-17 year'));
+	$login="";
+	$register="";
+	$reset="";
+	$confirmreset="";
+	$htmlreset='<div id="section3" class="section-w3ls">
+					<input type="radio" name="sections" id="option3"'.$reset.'>
+					<label for="option3" class="icon-left-w3pvt"><span class="fa fa-lock" aria-hidden="true"></span>Forgot Password?</label>
+					<article>
+						<form action="?" method="POST">
+							<h3 class="legend">Reset Password</h3>
+							<h5 class="masslog">'.$_SESSION['msglog'].'</h5>
+							<p class="para-style">Enter your email address below and we\'ll send you an email with instructions.</p>
+							<div class="input">
+								<span class="fa fa-envelope-o" aria-hidden="true"></span>
+								<input style="margin-bottom: 0.7em;" type="email" placeholder="E-mail" name="email" required />
+							</div>
+							<div class="g-recaptcha" data-sitekey="6Lf20KsUAAAAAEBa5gUBuuPdH9YxIG-QvgU5OyEs"></div>
+							<button style="width: 100%; margin:0px;"  type="submit" class="btn submit last-btn" name="submit" value="reset" >Reset</button>
+						</form>
+					</article>
+				</div>
+				';
+?>
+
 <!DOCTYPE HTML>
 <html lang="zxx">
 <head>
 	<title>Holland Bakery</title>
-	<link rel="shortcut icon" type="image/x-icon" href="../../images/holland.png">
+	<link rel="shortcut icon" type="image/x-icon" href="images/holland.png">
 	<!-- Meta tag Keywords -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8" />
@@ -20,9 +47,9 @@
 	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 	<!-- css files -->
-	<link rel="stylesheet" href="../../css/style.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 	<!-- Style-CSS -->
-	<link href="../../css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<!-- Font-Awesome-Icons-CSS -->
 	<!-- //css files -->
 
@@ -64,18 +91,19 @@
 			<!-- vertical tabs -->
 			<div class="vertical-tab">
 				<div id="section1" class="section-w3ls">
-					<input type="radio" name="sections" id="option1" <?php echo $login; ?> >
+					<input type="radio" name="sections" id="option1" checked>
 					<label for="option1" class="icon-left-w3pvt"><span class="fa fa-user-circle" aria-hidden="true"></span>Login</label>
 					<article>
 						<form action="#" method="post" name="login">
 							<div>
 								<h3 class="legend">Login Here</h3>
-								<h5 class="masslog"><?php echo $_SESSION['msglog']; ?></h5>
+								<h5 class="masslog"><?php //echo $_SESSION['msglog']; ?></h5>
 							</div>
 							<div class="input">
 								<span class="fa fa-envelope-o" aria-hidden="true"></span>
 								<input type="TEXT" placeholder="E-mail / Phone" name="email" value="<?php echo $_SESSION['usernamp']; ?>" required />
 							</div>
+							<div style="margin: 0% 0% 1.3% 0%; padding-left:15%; background-color: red; color: white; border-radius: 3px; font-size: 0.8em;"><?php echo $_SESSION['msgactivated']; ?></div>
 							<div class="input">
 								<span class="fa fa-key" aria-hidden="true"></span>
 								<input type="password" placeholder="Password" name="password" value="<?php echo $_SESSION['passnamp']; ?>" required />
@@ -85,7 +113,7 @@
 									<input type="text" maxlength="4" id="kodecaptcha" required="required" autofocus onKeyPress='return numbersonly(this, event)' name="kodecaptcha" placeholder="Captcha" title="&nbsp;Insert captcha code&#013;&#013;&nbsp;Click on captcha to refresh code" />
 									
 								</div>
-								<img style=" width: 100%;  height: 43px; cursor:pointer;" src="../../control/func_captcha.php" title="Click to refresh captcha" onClick="this.src='../../control/func_captcha.php?rand='+Math.random();">
+								<img style=" width: 100%;  height: 43px; cursor:pointer;" src="control/func_captcha.php" title="Click to refresh captcha" onClick="this.src='control/func_captcha.php?rand='+Math.random();">
 							</div>
 							<button style="width: 100%;"  type="submit" class="btn submit" name="submit" value="login">Login</button>
 						</form>
@@ -98,7 +126,7 @@
 						<form action="#" method="post">
 							<div>
 								<h3 class="legend">Register Here</h3>
-								<h5 class="masslog"><?php echo $_SESSION['msgreg']; ?></h5>
+								<h5 class="masslog"><?php //echo $_SESSION['msgreg']; ?></h5>
 							</div>
 							<div class="tab">
 								<div class="input">
@@ -119,22 +147,24 @@
 								</div>
 								 	
 							</div>
+						
 							<div class="tab">
 								<div class="select">
 									<span class="fa fa-map-marker" aria-hidden="true"></span>
-									<?php echo getprovinces($provinces);?>
+									<?php //echo getprovinces($provinces);?>
 								</div>
 								<div class="select" id='city'>
 									<span class="fa fa-map-marker aria-hidden="true"></span>
-									<?php echo getcity($provinces,$regencies);?> 
+									<?php //echo getcity($provinces,$regencies);?> 
 								</div>
 								<div style="width: 100%; height: 43px;">
 									<div class="select" id='kitchen'>
 										<span class="fa fa-map-marker" aria-hidden="true"></span>
-										<?php echo getkitchen($kitchen,$provinces,$regencies);?> 
+										<?php //echo getkitchen($kitchen,$provinces,$regencies);?> 
 									</div>
 								</div>
 							</div>
+
 							<div class="tab">
 								<div class="input">
 									<span class="fa fa-mobile" aria-hidden="true"></span>
@@ -142,6 +172,21 @@
 									
 								</div>
 								<div id='phonever' style="margin: 0% 0% 1.3% 0%; padding-left:15%; background-color: red; color: white; border-radius: 3px; font-size: 0.8em;"></div>
+								
+								<div class="input">
+									<span class="fa fa-user-circle" aria-hidden="true"></span>
+									<span>BirthDay : </span>
+									<input type="date" placeholder="Birthday" onblur="Birthday(this.value)" style="width:40%;  float:right;" name="birthday" required />
+								</div>
+								<div id='birthdayev' style="margin: 0% 0% 1.3% 0%; padding-left:15%; background-color: red; color: white; border-radius: 3px; font-size: 0.8em;"></div>
+							</div>
+							<div class="tab">
+								<div class="input">
+									<span class="fa fa-user-circle" aria-hidden="true"></span>
+									<input class="bebas" type="text" onblur="reveraL(this.value)" placeholder="Referal Code Jika Ada" name="referal" />
+								</div>
+								<div id='referal' style="margin: 0% 0% 1.3% 0%; padding-left:15%; background-color: red; color: white; border-radius: 3px; font-size: 0.8em;"></div>
+
 								<div class="input">
 									<span class="fa fa-key" aria-hidden="true"></span>
 									<input type="password" placeholder="Password" name="password" autocomplete="off" required />
@@ -157,7 +202,7 @@
 								<div style="float:right;">
 									<button type="button" id="prevBtn" class="btn submit" onclick="nextPrev(-1)">Previous</button>
 									<button type="button" id="nextBtn" class="btn submit" onclick="nextPrev(1)">Next</button>
-									<button type="submit" id="sbmtBtn" class="btn submit" name="submit" value="register" disabled>Register</button>
+									<button type="submit" id="sbmtBtn" class="btn submit" name="submit" value="register" >Register</button>
 								</div>
 							</div>
 							<div style="float:left;">
@@ -170,7 +215,7 @@
 					</article>
 				</div>
 				
-				<?=$htmlreset?>
+				<?php echo $htmlreset;?>
 			</div>
 			<!-- //vertical tabs -->
 			<div class="clear"></div>
@@ -178,20 +223,20 @@
 		<!-- copyright -->
 		<div class="copyright">
 			<a href="https://www.hollandbakery.co.id/" target="_blank">
-				<h2 style="color:#fff;">&copy; <?=date('Y')?> by IT Holland Bakery Indonesia</h2>
+				<h2 style="color:#fff;">&copy; <?=date('Y')?> by Holland Bakery Indonesia</h2>
 			</a>
 		</div>
 		<!-- //copyright -->
 	</div>
 
 </body>
-<script src="../../js/java.js"></script>
-<script src="../../vendor/jquery-3.2.1.min.js"></script>
+<script src="js/java.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	    $('#provinces').on('change', function(){
             var nama=$('#provinces').val();
             var nameclass="form-control";
-            $("#city" ).load( "../../control/valid_process.php", {"search_kota":nama,"load_city":"1"}); //membuat permintaan ajax menggunakan dengan jQuery 
+            $("#city" ).load( "control/valid_process.php", {"search_kota":nama,"load_city":"1"}); //membuat permintaan ajax menggunakan dengan jQuery 
         });
 		
 		
@@ -199,8 +244,8 @@
     if (str.length == 0) {
 			document.getElementById("phonever").innerHTML = "";
 			
-			document.getElementById("sbmtBtn").disabled = true; 
-			document.getElementById("sbmtBtn").style.color = "grey";
+			document.getElementById("nextBtn").disabled = true; 
+			document.getElementById("nextBtn").style.color = "grey";
 			
 			return;
 		} else {
@@ -211,12 +256,12 @@
 					
 					if(this.responseText =='')
 					{
-						document.getElementById("sbmtBtn").disabled = false; 
-						document.getElementById("sbmtBtn").style.color = "white";
+						document.getElementById("nextBtn").disabled = false; 
+						document.getElementById("nextBtn").style.color = "white";
 					}else
 					{
-						document.getElementById("sbmtBtn").disabled = true; 
-						document.getElementById("sbmtBtn").style.color = "grey";
+						document.getElementById("nextBtn").disabled = true; 
+						document.getElementById("nextBtn").style.color = "grey";
 					}
 						
 				}
@@ -234,8 +279,8 @@
     if (str.length == 0) {
 			document.getElementById("mailever").innerHTML = "";
 			
-			document.getElementById("sbmtBtn").disabled = true; 
-			document.getElementById("sbmtBtn").style.color = "grey";
+			document.getElementById("nextBtn").disabled = true; 
+			document.getElementById("nextBtn").style.color = "grey";
 			
 			return;
 		} else {
@@ -246,12 +291,12 @@
 					
 					if(this.responseText =='')
 					{
-						document.getElementById("sbmtBtn").disabled = false; 
-						document.getElementById("sbmtBtn").style.color = "white";
+						document.getElementById("nextBtn").disabled = false; 
+						document.getElementById("nextBtn").style.color = "white";
 					}else
 					{
-						document.getElementById("sbmtBtn").disabled = true; 
-						document.getElementById("sbmtBtn").style.color = "grey";
+						document.getElementById("nextBtn").disabled = true; 
+						document.getElementById("nextBtn").style.color = "grey";
 					}
 						
 				}
@@ -262,11 +307,80 @@
 			
 		}
 	}
+	
+	function Birthday(str) {
+
+    if (str.length == 0) {
+			document.getElementById("birthdayev").innerHTML = "";
+			
+			document.getElementById("nextBtn").disabled = true; 
+			document.getElementById("nextBtn").style.color = "grey";
+			
+			return;
+		} else {
+
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+				
+					
+					if(this.responseText =='')
+					{
+						
+						document.getElementById("birthdayev").innerHTML ="Anda Tidak Bisa Mengubah DOB Setelah Proses Ini";
+						document.getElementById("nextBtn").disabled = false; 
+						document.getElementById("nextBtn").style.color = "white";
+					}else
+					{	
+						document.getElementById("birthdayev").innerHTML = this.responseText;
+						document.getElementById("nextBtn").disabled = true; 
+						document.getElementById("nextBtn").style.color = "grey";
+					}
+						
+				}
+			}
+			
+			xmlhttp.open("GET", "https://apps.hollandbakery.co.id/holl4nd_m3mb312/control/valid_process.php?birthday="+str, true);
+			xmlhttp.send();
+			
+		}
+	}
+	
+	
+	function reveraL(str) {
+		
+    if (str.length == 0) {
+
+			document.getElementById("referal").innerHTML = "";
+			
+			document.getElementById("nextBtn").disabled = false; 
+			document.getElementById("nextBtn").style.color = "white";
+			
+			return;
+		} else {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("referal").innerHTML = this.responseText;
+					
+					if(this.responseText =='')
+					{
+						document.getElementById("nextBtn").disabled = false; 
+						document.getElementById("nextBtn").style.color = "white";
+					}else
+					{
+						document.getElementById("nextBtn").disabled = true; 
+						document.getElementById("nextBtn").style.color = "grey";
+					}
+						
+				}
+			}
+			
+			xmlhttp.open("GET", "https://apps.hollandbakery.co.id/holl4nd_m3mb312/control/valid_process.php?referal="+str, true);
+			xmlhttp.send();
+			
+		}
+	}
+	
 </script>
 </html>
-<?php
-if(isset($_SESSION['msglog']))
-{
-	unset($_SESSION['msglog']);
-}
-?>
